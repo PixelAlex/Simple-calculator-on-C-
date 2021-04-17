@@ -1,44 +1,54 @@
 #include <iostream>
-#include <math.h>
+#include <cmath>
 
 using namespace std;
 
-double Calculate(double first, char let, double second);
+void Calculate (double first, char let, double second);
 
 int main() {
-    setlocale(LC_ALL, "ru");
-    double a, b, res;
+    setlocale(LC_ALL, "rus");
+
+    double first, second;
     char let;
-    cout << "Hello! This is a simple console calculator on C++! Enter the expression: ";
-    cin >> a >> let >> b;
-    res = Calculate(a, let, b);
-    cout << "The result is: " << res << endl;
+
+    cout << "\nHello! This is a simple calculator. Enter your expression: ";
+    cin >> first >> let >> second;
+    Calculate(first, let, second);
+
     return 0;
 }
 
-double Calculate(double first, char let, double second)
-{
+void Calculate (double first, char let, double second) {
+    double res;
+
     switch (let) {
         case '+':
-            return first + second;
+            res = first + second;
             break;
         case '-':
-            return first - second;
+            res = first - second;
             break;
         case '*':
-            return first * second;
+            res = first * second;
             break;
         case '/':
-            return first / second;
+            res = first / second;
             break;
         case ':':
-            return first / second;
+            res = first / second;
             break;
         case '^':
-            return pow(first, second);
+            res = pow(first, second);
             break;
         default:
-            return 0;
+            res = 0;
             break;
+    }
+
+    if (second == 0 && let == '/' || let == ':') {
+        cout << "Результат: на ноль делить нельзя!" << endl;
+        main();
+    } else {
+        cout << "Результат: " << res << endl;
     }
 }
